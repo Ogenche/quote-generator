@@ -30,6 +30,7 @@ const quotes = [
 const quoteText = document.getElementById('quote-text');
 const quoteAuthor = document.getElementById('quote-author');
 const newQuoteBtn = document.getElementById('new-quote-btn');
+const copyBtn = document.getElementById('copy-btn');
 
 // 3. Create a function to get a random quote
 function getNewQuote() {
@@ -44,6 +45,26 @@ function getNewQuote() {
     quoteAuthor.innerText = "- " + randomQuote.author;
 }
 
-// 4. Add an event listener to the button
+// 4. Adding event listener to the button
 // This will call the getNewQuote function every time the button is clicked
 newQuoteBtn.addEventListener('click', getNewQuote);
+// 5. Function to copy the quote
+function copyQuote() {
+    const currentQuote = quoteText.innerText;
+    const currentAuthor = quoteAuthor.innerText;
+    const TextToCopy = `"${currentQuote}" ${currentAuthor}`;
+
+    // Use modern Navigator API to copy to the clipboard
+    navigator.clipboard.writeText(TextToCopy);
+
+    // Provide feedback to the user
+    copyBtn.innerText = "Copied!";
+    setTimeout(() => {
+        copyBtn.innerText = "Copy";
+    }, 1500); // Changes text back to "Copy" adter 1.5 seconds
+}
+
+// 6. Event listener for the new copy button
+copyBtn.addEventListener('click', copyQuote);
+
+//END OF NEW CODE

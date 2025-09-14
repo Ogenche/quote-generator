@@ -33,7 +33,7 @@ body {
     color: #555;
 }
 
-#new-quote-btn {
+#new-quote-btn, #copy-btn {
     background-color: #007bff;
     color: white;
     border: none;
@@ -44,6 +44,6 @@ body {
     transition: background-color 0.3s;
 }
 
-#new-quote-btn:hover {
+#new-quote-btn:hover, copy-btn:hover {
     background-color: #0056b3;
 }
