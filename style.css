@@ -6,6 +6,8 @@ body {
     height: 100vh;
     background-color: #f0f2f5;
     margin: 0;
+    padding: 15px;
+    box-sizing: border-box;
 }
 
 .quote-container {
@@ -13,8 +15,8 @@ body {
     background-color: white;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 80%;
+    box-shadow: 0 4px_8px rgba(0,0,0,0.1);
+    width: 100%;
     max-width: 600px;
 }
 
@@ -26,6 +28,7 @@ body {
 #quote-text {
     font-size: 1.5em;
     font-style: italic;
+    transition: opacity 0.4s ease-in-out;
 }
 
 #quote-author {
@@ -33,17 +36,35 @@ body {
     color: #555;
 }
 
-#new-quote-btn, #copy-btn {
+.button-container {
+    display: flex;
+    gap: 10px; /* Adds space between the buttons */
+}
+
+/* Style all buttons inside the container */
+.button-container button {
+    flex: 1; /* Makes all buttons take up equal space */
     background-color: #007bff;
     color: white;
     border: none;
-    padding: 12px 24px;
+    padding: 12px 0; /* Adjusted padding for equal height */
     font-size: 1em;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, opacity 0.3s;
 }
 
-#new-quote-btn:hover, copy-btn:hover {
+.button-container button:hover {
     background-color: #0056b3;
+}
+
+/* Style for when buttons are disabled (e.g., during loading) */
+.button-container button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#error-message {
+    color: #d93025;
+    font-weight: bold;
 }
