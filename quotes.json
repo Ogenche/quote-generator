@@ -1,42 +1,73 @@
 [
     {
         "quote": "The only way to do great work is to love what you do.",
-        "author": "Steve Jobs"
-    },
-    {
-        "quote": "Innovation distinguishes between a leader and a follower.",
-        "author": "Steve Jobs"
+        "author": "Steve Jobs",
+        "authorInfo": {
+            "name": "Steve Jobs",
+            "title": "Co-founder of Apple Inc.",
+            "bio": "An American inventor, designer and entrepreneur who was the co-founder, chief executive and chairman of Apple Computer.",
+            "lifespan": "1955-2011",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Steve_Jobs",
+            "countries": [
+                { "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }
+            ]
+        }
     },
     {
         "quote": "Strive not to be a success, but rather to be of value.",
-        "author": "Albert Einstein"
-    },
-    {
-        "quote": "The mind is everything. What you think you become.",
-        "author": "Buddha"
-    },
-    {
-        "quote": "An unexamined life is not worth living.",
-        "author": "Socrates"
-    },
-    {
-        "quote": "You miss 100% of the shots you don't take.",
-        "author": "Wayne Gretzky"
+        "author": "Albert Einstein",
+        "authorInfo": {
+            "name": "Albert Einstein",
+            "title": "Theoretical Physicist",
+            "bio": "A German-born theoretical physicist who developed the theory of relativity, one of the two pillars of modern physics.",
+            "lifespan": "1879-1955",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Albert_Einstein",
+            "countries": [
+                { "name": "Germany", "code": "de", "wikiUrl": "https://en.wikipedia.org/wiki/Germany" },
+                { "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }
+            ]
+        }
     },
     {
         "quote": "The greatest glory in living lies not in never falling, but in rising every time we fall.",
-        "author": "Nelson Mandela"
+        "author": "Nelson Mandela",
+        "authorInfo": {
+            "name": "Nelson Mandela",
+            "title": "President of South Africa",
+            "bio": "A South African anti-apartheid revolutionary and political leader who served as the first president of South Africa from 1994 to 1999.",
+            "lifespan": "1918-2013",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Nelson_Mandela",
+            "countries": [
+                { "name": "South Africa", "code": "za", "wikiUrl": "https://en.wikipedia.org/wiki/South_Africa" }
+            ]
+        }
     },
     {
         "quote": "The future belongs to those who believe in the beauty of their dreams.",
-        "author": "Eleanor Roosevelt"
+        "author": "Eleanor Roosevelt",
+        "authorInfo": {
+            "name": "Eleanor Roosevelt",
+            "title": "First Lady of the United States",
+            "bio": "An American political figure, diplomat and activist who served as the first lady of the United States from 1933 to 1945.",
+            "lifespan": "1884-1962",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Eleanor_Roosevelt",
+            "countries": [
+                { "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }
+            ]
+        }
     },
     {
-        "quote": "It is during our darkest moments that we must focus to see the light.",
-        "author": "Aristotle"
-    },
-    {
-        "quote": "Do not go where the path may lead, go instead where there is no path and leave a trail.",
-        "author": "Ralph Waldo Emerson"
+        "quote": "An unexamined life is not worth living.",
+        "author": "Socrates",
+        "authorInfo": {
+            "name": "Socrates",
+            "title": "Greek Philosopher",
+            "bio": "A classical Greek philosopher credited as one of the founders of Western philosophy, and as being the first moral philosopher.",
+            "lifespan": "c. 470–399 BC",
+            "wikiUrl": "https://en.wikipedia.org/wiki/Socrates",
+            "countries": [
+                { "name": "Ancient Greece", "code": "gr", "wikiUrl": "https://en.wikipedia.org/wiki/Ancient_Greece" }
+            ]
+        }
     }
 ]

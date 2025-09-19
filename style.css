@@ -68,3 +68,97 @@ body {
     color: #d93025;
     font-weight: bold;
 }
+
+/* Make the author name in the main view look clickable */
+#quote-author span {
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+
+#quote-author span:hover {
+    color: #0056b3;
+}
+
+/* Modal Overlay (the dark background) */
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+}
+
+/* Author Modal Popup */
+#author-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 101;
+    width: 90%;
+    max-width: 500px;
+}
+
+/* Close button for the modal */
+#modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2.0em;
+    cursor: pointer;
+    color: #888;
+}
+
+/* Styling for content inside the modal */
+#modal-content {
+    font-size: 0.9em; /* Smaller font as requested */
+    color: #333;
+}
+
+#modal-author-name a {
+    color: #0056b3;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+#modal-author-name a:hover {
+    text-decoration: underline;
+}
+
+#modal-author-title {
+    font-style: italic;
+    color: #666;
+    margin-top: -5px;
+}
+
+#modal-flags-container {
+    margin: 15px 0;
+}
+
+#modal-flags-container a {
+    margin-right: 10px;
+}
+
+#modal-flags-container img {
+    width: 40px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#modal-author-lifespan {
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* Helper class to hide/show elements */
+.hidden {
+    display: none;
+}
