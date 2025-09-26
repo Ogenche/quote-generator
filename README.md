@@ -1,6 +1,6 @@
 # Random Quote Generator
 
-> A web application that displays random quotes. Users can discover new quotes, learn about the authors, and share their favorite quotes on social media. Built with a focus on clean code. This project uses vanilla technologies (HTML, CSS, and JavaScript).
+> A web application that displays random quotes. Users can discover new quotes, learn about the authors, and share their favorite quotes on social media. Built with a focus on clean code. This project uses vanilla technologies (HTML, CSS, and JavaScript). Deployed on Vercel.
 
 **[View Live Demo Here](https://quote-generator-orpin-two.vercel.app)**
 
