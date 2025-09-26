@@ -1,8 +1,7 @@
 /**
- * @file Manages the functionality of a random quote generator application.
- * @description This script fetches quotes from a JSON file, displays them, and provides
- * functionality for copying, tweeting, and viewing author information in a modal.
- * It also persists the last viewed quote using localStorage.
+ * @file Manages the functionality of the Random Quote Generator application.
+ * @description This script fetches quotes, displays them, and handles all user interactions 
+ * including theme toggling, favoriting, history, sharing, and multi-language support.
  */
 
 // ===================================================================================
@@ -12,8 +11,13 @@
 const quoteText = document.getElementById('quote-text');
 const quoteAuthor = document.getElementById('quote-author');
 const newQuoteBtn = document.getElementById('new-quote-btn');
+const prevQuoteBtn = document.getElementById('prev-quote-btn');
 const copyBtn = document.getElementById('copy-btn');
 const tweetBtn = document.getElementById('tweet-btn');
+const favoriteBtn = document.getElementById('favorite-btn');
+const themeToggle = document.getElementById('theme-toggle');
+const langToggle = document.getElementById('lang-toggle');
+const favoritesListBtn = document.getElementById('favorites-list-btn');
 const errorMessage = document.getElementById('error-message');
 
 // Modal Elements
@@ -27,41 +31,76 @@ const modalAuthorLifespan = document.getElementById('modal-author-lifespan');
 const modalAuthorBio = document.getElementById('modal-author-bio');
 
 // ===================================================================================
-//  Application State
+//  Application State & Translations
 // ===================================================================================
 
-/** @type {Array<Object>} - An array to hold all quote objects fetched from the JSON file. */
 let quotes = [];
-
-/** @type {Object} - The quote object currently being displayed in the UI. */
 let currentQuote = {};
+let quoteHistory = [];
+let favoriteQuotes = JSON.parse(localStorage.getItem('favoriteQuotes')) || [];
+let currentFavoritesModal = null;
+let currentLang = localStorage.getItem('language') || 'en';
+const supportedLangs = ['en', 'sw'];
+
+/** Centralized object for all UI text translations. Easy to add new languages here. */
+const uiTranslations = {
+    en: {
+        mainTitle: "Random Quotes",
+        loading: "Loading quotes...",
+        prevQuote: "Previous",
+        newQuote: "New Quote",
+        copied: "Copied!",
+        copyTitle: "Copy Quote",
+        tweetTitle: "Tweet Quote",
+        addFavTitle: "Add to Favorites",
+        removeFavTitle: "Remove from Favorites",
+        showFavTitle: "Show Favorites",
+        themeTitle: "Toggle Theme",
+        langTitle: "Change Language",
+        favoritesModalTitle: "Favorite Quotes",
+        noFavorites: "You have no favorite quotes yet. Click the heart icon to add one!",
+        remove: "Remove"
+    },
+    sw: {
+        mainTitle: "Nukuu Nasibu",
+        loading: "Inapakia nukuu...",
+        prevQuote: "Iliyopita",
+        newQuote: "Nukuu Mpya",
+        copied: "Imenakiliwa!",
+        copyTitle: "Nakili Nukuu",
+        tweetTitle: "Tuma Nukuu Twitter",
+        addFavTitle: "Ongeza kwa Vipendwa",
+        removeFavTitle: "Ondoa kutoka kwa Vipendwa",
+        showFavTitle: "Onyesha Vipendwa",
+        themeTitle: "Badilisha Mandhari",
+        langTitle: "Badilisha Lugha",
+        favoritesModalTitle: "Nukuu Pendwa",
+        noFavorites: "Huna nukuu zozote pendwa bado. Bofya ikoni ya moyo ili kuongeza!",
+        remove: "Ondoa"
+    }
+};
 
 // ===================================================================================
 //  Core Application Logic
 // ===================================================================================
 
-/**
- * Initializes the application. Fetches quotes from the JSON file, handles the UI 
- * loading state, and displays the first quote (either from localStorage or a new random one).
- */
 async function initializeApp() {
     setLoadingState(true);
     try {
         const response = await fetch('quotes.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         quotes = await response.json();
+
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeToggle.innerHTML = savedTheme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
         
-        // Attempt to load the last viewed quote from browser storage.
-        const savedQuote = localStorage.getItem('lastQuote');
-        if (savedQuote) {
-            currentQuote = JSON.parse(savedQuote);
-            displayQuote();
-        } else {
-            // If no quote is saved, fetch a new random one.
-            getNewQuote();
-        }
+        // Set initial language and display first quote
+        await applyLanguage();
+        getNewQuote(true); // Pass true for initial load
+        updatePrevButtonState();
+
     } catch (error) {
         console.error("Could not fetch quotes:", error);
         displayError("Sorry, we couldn't load any quotes. Please try again later.");
@@ -70,132 +109,288 @@ async function initializeApp() {
     }
 }
 
-/**
- * Selects a new random quote from the `quotes` array and triggers a UI update.
- */
-function getNewQuote() {
+function getNewQuote(isInitialLoad = false) {
     if (quotes.length === 0) return;
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    currentQuote = quotes[randomIndex];
+    
+    if (!isInitialLoad && currentQuote.quote) {
+        quoteHistory.push(currentQuote);
+        if (quoteHistory.length > 5) quoteHistory.shift();
+    }
+
+    let newQuote;
+    do {
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        newQuote = quotes[randomIndex];
+    } while (quotes.length > 1 && newQuote.quote.en === (currentQuote.quote && currentQuote.quote.en));
+    
+    currentQuote = newQuote;
+    
+    quoteText.classList.add('fade-out');
+    setTimeout(() => {
+        displayQuote();
+        quoteText.classList.remove('fade-out');
+    }, 400);
+
+    updatePrevButtonState();
+}
+
+function getPreviousQuote() {
+    if (quoteHistory.length === 0) return;
+    currentQuote = quoteHistory.pop();
+    quoteText.classList.add('fade-out');
+    setTimeout(displayQuote, 400);
+    updatePrevButtonState();
+}
+
+function displayQuote() {
+    if (!currentQuote || !currentQuote.quote) return;
+    quoteText.innerText = `"${currentQuote.quote[currentLang]}"`;
+    quoteAuthor.innerHTML = `<span id="author-name-span">- ${currentQuote.author}</span>`;
+    document.getElementById('author-name-span').addEventListener('click', openAuthorModal);
+    updateFavoriteButton();
+    quoteText.classList.remove('fade-out');
+}
+
+// ===================================================================================
+//  Language Functionality
+// ===================================================================================
+
+function switchLanguage() {
+    const currentIndex = supportedLangs.indexOf(currentLang);
+    const nextIndex = (currentIndex + 1) % supportedLangs.length;
+    currentLang = supportedLangs[nextIndex];
+    localStorage.setItem('language', currentLang);
+    applyLanguage();
+}
+
+function applyLanguage() {
+    // Update all static text with data-translate-key attribute
+    document.querySelectorAll('[data-translate-key]').forEach(el => {
+        const key = el.dataset.translateKey;
+        if (uiTranslations[currentLang][key]) {
+            el.innerText = uiTranslations[currentLang][key];
+        }
+    });
+
+    // Update titles/tooltips
+    copyBtn.title = uiTranslations[currentLang].copyTitle;
+    tweetBtn.title = uiTranslations[currentLang].tweetTitle;
+    favoritesListBtn.title = uiTranslations[currentLang].showFavTitle;
+    themeToggle.title = uiTranslations[currentLang].themeTitle;
+    langToggle.title = uiTranslations[currentLang].langTitle;
+
+    // Re-display the current quote in the new language
     displayQuote();
 }
 
-/**
- * Updates the main UI with the `currentQuote` data, makes the author's name
- * clickable, and saves the current quote to localStorage.
- */
-function displayQuote() {
-    quoteText.innerText = currentQuote.quote;
-    quoteAuthor.innerHTML = `<span id="author-name-span">- ${currentQuote.author}</span>`;
-    document.getElementById('author-name-span').addEventListener('click', openAuthorModal);
-    
-    // Persist the current quote to the user's browser storage.
-    localStorage.setItem('lastQuote', JSON.stringify(currentQuote));
-}
+// ===================================================================================
+//  Actions (Copy, Tweet, Favorites)
+// ===================================================================================
 
-/**
- * Copies the current quote and author to the user's clipboard using the Clipboard API.
- */
 function copyQuote() {
-    const textToCopy = `"${currentQuote.quote}" - ${currentQuote.author}`;
+    const textToCopy = `"${currentQuote.quote[currentLang]}" - ${currentQuote.author}`;
     navigator.clipboard.writeText(textToCopy).then(() => {
-        copyBtn.innerText = "Copied!";
-        setTimeout(() => { copyBtn.innerText = "Copy"; }, 1500);
-    });
+        const originalContent = copyBtn.innerHTML;
+        copyBtn.innerHTML = uiTranslations[currentLang].copied;
+        setTimeout(() => { copyBtn.innerHTML = originalContent; }, 2000);
+    }).catch(err => console.error("Failed to copy text: ", err));
 }
 
-/**
- * Opens a new Twitter window with a pre-populated tweet containing the current quote.
- */
 function tweetQuote() {
-    const textToTweet = `"${currentQuote.quote}" - ${currentQuote.author}`;
+    const textToTweet = `"${currentQuote.quote[currentLang]}" - ${currentQuote.author}`;
     const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(textToTweet)}`;
     window.open(twitterUrl, '_blank');
 }
 
+function toggleFavorite() {
+    // A favorite is now identified by the quote's English text (as a unique ID) AND the language it was saved in.
+    const index = favoriteQuotes.findIndex(q => q.quote.en === currentQuote.quote.en && q.savedInLang === currentLang);
+    
+    if (index > -1) {
+        // If it exists for the current language, remove it.
+        favoriteQuotes.splice(index, 1);
+    } else {
+        // If it doesn't exist, add it with the current language recorded.
+        const newFavorite = { ...currentQuote, savedInLang: currentLang };
+        favoriteQuotes.push(newFavorite);
+    }
+    
+    localStorage.setItem('favoriteQuotes', JSON.stringify(favoriteQuotes));
+    updateFavoriteButton();
+}
+
+function updateFavoriteButton() {
+    // Check if the current quote is favorited IN THE CURRENT LANGUAGE.
+    const isFavorited = favoriteQuotes.some(q => q.quote.en === currentQuote.quote.en && q.savedInLang === currentLang);
+    
+    if (isFavorited) {
+        favoriteBtn.classList.add('favorited');
+        favoriteBtn.innerHTML = '<i class="fa-solid fa-heart"></i>';
+        favoriteBtn.title = uiTranslations[currentLang].removeFavTitle;
+    } else {
+        favoriteBtn.classList.remove('favorited');
+        favoriteBtn.innerHTML = '<i class="fa-regular fa-heart"></i>';
+        favoriteBtn.title = uiTranslations[currentLang].addFavTitle;
+    }
+}
+
 // ===================================================================================
-//  Modal Functionality
+//  Modal Functionality (Author & Favorites)
 // ===================================================================================
 
-/**
- * Populates the author modal with information from the current quote and makes it visible.
- */
 function openAuthorModal() {
     const info = currentQuote.authorInfo;
-    if (!info) return; // Exit if the current quote has no author info.
+    if (!info) return;
 
-    modalAuthorName.innerHTML = `<a href="${info.wikiUrl}" target="_blank">${info.name}</a>`;
-    modalAuthorTitle.innerText = info.title;
+    modalAuthorName.innerHTML = `<a href="${info.wikiUrl}" target="_blank" rel="noopener noreferrer">${info.name}</a>`;
+    modalAuthorTitle.innerText = info.title[currentLang];
     modalAuthorLifespan.innerText = info.lifespan;
-    modalAuthorBio.innerText = info.bio;
+    modalAuthorBio.innerText = info.bio[currentLang];
 
-    // Clear any previous flags and generate new ones.
     modalFlagsContainer.innerHTML = '';
     info.countries.forEach(country => {
         const flagLink = document.createElement('a');
         flagLink.href = country.wikiUrl;
         flagLink.target = '_blank';
+        flagLink.rel = 'noopener noreferrer';
         flagLink.title = country.name;
-
-        const flagImg = document.createElement('img');
-        flagImg.src = `https://flagcdn.com/w40/${country.code}.png`;
-        flagImg.alt = `Flag of ${country.name}`;
-        
-        flagLink.appendChild(flagImg);
+        flagLink.innerHTML = `<img src="https://flagcdn.com/w40/${country.code}.png" alt="Flag of ${country.name}">`;
         modalFlagsContainer.appendChild(flagLink);
     });
 
-    modalOverlay.classList.remove('hidden');
-    authorModal.classList.remove('hidden');
+    modalOverlay.classList.add('visible');
+    authorModal.classList.add('visible');
 }
 
-/**
- * Hides the author modal and the background overlay.
- */
+function showFavoritesModal() {
+    const modal = document.createElement('div');
+    modal.className = 'favorites-modal';
+    
+    let favoritesHTML = `<button class="fav-modal-close-btn" aria-label="Close modal">&times;</button><h2><i class="fa-solid fa-star"></i> ${uiTranslations[currentLang].favoritesModalTitle}</h2>`;
+    if (favoriteQuotes.length > 0) {
+        favoritesHTML += '<ul>';
+        favoriteQuotes.forEach((q, index) => {
+            // Display the quote in the language it was saved in. Default to 'en' for old data.
+            const savedLang = q.savedInLang || 'en'; 
+            let quoteContent = '';
+
+            if (typeof q.quote === 'object' && q.quote !== null) {
+                quoteContent = q.quote[savedLang] || q.quote['en'];
+            } else if (typeof q.quote === 'string') {
+                quoteContent = q.quote;
+            }
+
+            favoritesHTML += `<li>
+                <p>"${quoteContent}"</p>
+                <strong>- ${q.author}</strong>
+                <button class="remove-favorite-btn" data-index="${index}">${uiTranslations[currentLang].remove}</button>
+            </li>`;
+        });
+        favoritesHTML += '</ul>';
+    } else {
+        favoritesHTML += `<p style="margin-top: 1rem;">${uiTranslations[currentLang].noFavorites}</p>`;
+    }
+    
+    modal.innerHTML = favoritesHTML;
+    document.body.appendChild(modal);
+    currentFavoritesModal = modal;
+
+    setTimeout(() => {
+        modalOverlay.classList.add('visible');
+        modal.classList.add('visible');
+    }, 10);
+
+    modal.querySelector('.fav-modal-close-btn').addEventListener('click', closeFavoritesModal);
+    modal.querySelectorAll('.remove-favorite-btn').forEach(btn => btn.addEventListener('click', handleRemoveFavorite));
+}
+
+function handleRemoveFavorite(e) {
+    const indexToRemove = parseInt(e.target.dataset.index, 10);
+    favoriteQuotes.splice(indexToRemove, 1);
+    localStorage.setItem('favoriteQuotes', JSON.stringify(favoriteQuotes));
+    closeFavoritesModal();
+    showFavoritesModal(); 
+    updateFavoriteButton(); // Update the main heart icon in case the removed quote was the current one
+}
+
 function closeAuthorModal() {
-    modalOverlay.classList.add('hidden');
-    authorModal.classList.add('hidden');
+    modalOverlay.classList.remove('visible');
+    authorModal.classList.remove('visible');
+}
+
+function closeFavoritesModal() {
+    if (currentFavoritesModal) {
+        modalOverlay.classList.remove('visible');
+        currentFavoritesModal.classList.remove('visible');
+        setTimeout(() => {
+            currentFavoritesModal.remove();
+            currentFavoritesModal = null;
+        }, 300);
+    }
 }
 
 // ===================================================================================
 //  UI Helper Functions
 // ===================================================================================
 
-/**
- * Manages the enabled/disabled state of buttons and button text during data fetching.
- * @param {boolean} isLoading - Indicates if the application is in a loading state.
- */
 function setLoadingState(isLoading) {
-    newQuoteBtn.disabled = copyBtn.disabled = tweetBtn.disabled = isLoading;
-    newQuoteBtn.innerText = isLoading ? "Loading..." : "New Quote";
+    const buttons = [newQuoteBtn, prevQuoteBtn, copyBtn, tweetBtn];
+    buttons.forEach(btn => btn.disabled = isLoading);
+    if(isLoading) {
+        newQuoteBtn.innerText = uiTranslations[currentLang].loading;
+    } else {
+        newQuoteBtn.innerText = uiTranslations[currentLang].newQuote;
+    }
 }
 
-/**
- * Hides the main quote display and shows a user-friendly error message.
- * @param {string} message - The error message to display in the UI.
- */
+function updatePrevButtonState() {
+    prevQuoteBtn.disabled = quoteHistory.length === 0;
+}
+
 function displayError(message) {
     quoteText.style.display = 'none';
     quoteAuthor.style.display = 'none';
     errorMessage.innerText = message;
+    errorMessage.style.display = 'block';
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    themeToggle.innerHTML = newTheme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
 }
 
 // ===================================================================================
 //  Event Listeners
 // ===================================================================================
 
-// Connects the primary UI buttons to their respective functions.
-newQuoteBtn.addEventListener('click', getNewQuote);
+newQuoteBtn.addEventListener('click', () => getNewQuote(false));
+prevQuoteBtn.addEventListener('click', getPreviousQuote);
 copyBtn.addEventListener('click', copyQuote);
 tweetBtn.addEventListener('click', tweetQuote);
-
-// Connects the modal's close button and overlay to the close function.
+favoriteBtn.addEventListener('click', toggleFavorite);
+themeToggle.addEventListener('click', toggleTheme);
+langToggle.addEventListener('click', switchLanguage);
+favoritesListBtn.addEventListener('click', showFavoritesModal);
 modalCloseBtn.addEventListener('click', closeAuthorModal);
-modalOverlay.addEventListener('click', closeAuthorModal);
+
+modalOverlay.addEventListener('click', () => {
+    closeAuthorModal();
+    closeFavoritesModal();
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeAuthorModal();
+        closeFavoritesModal();
+    }
+});
 
 // ===================================================================================
 //  Application Initialization
 // ===================================================================================
 
-// Kicks off the entire application process when the script is loaded.
 initializeApp();
+
