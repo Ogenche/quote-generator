@@ -1,73 +1,123 @@
 [
     {
-        "quote": "The only way to do great work is to love what you do.",
+        "quote": {
+            "en": "The only way to do great work is to love what you do.",
+            "sw": "Njia pekee ya kufanya kazi nzuri ni kupenda unachofanya."
+        },
         "author": "Steve Jobs",
-        "authorInfo": {
-            "name": "Steve Jobs",
-            "title": "Co-founder of Apple Inc.",
-            "bio": "An American inventor, designer and entrepreneur who was the co-founder, chief executive and chairman of Apple Computer.",
-            "lifespan": "1955-2011",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Steve_Jobs",
-            "countries": [
-                { "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }
-            ]
-        }
+        "authorInfo": { "name": "Steve Jobs", "title": {"en": "Co-founder of Apple Inc.", "sw": "Mwanzilishi Mwenza wa Apple Inc."}, "bio": {"en": "An American inventor, designer and entrepreneur who was the co-founder, chief executive and chairman of Apple Computer.", "sw": "Mvumbuzi, mbunifu na mjasiriamali wa Marekani aliyekuwa mwanzilishi mwenza, mtendaji mkuu na mwenyekiti wa Apple Computer."}, "lifespan": "1955-2011", "wikiUrl": "https://en.wikipedia.org/wiki/Steve_Jobs", "countries": [{ "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }] }
     },
     {
-        "quote": "Strive not to be a success, but rather to be of value.",
+        "quote": {
+            "en": "Your time is limited, so don't waste it living someone else's life.",
+            "sw": "Muda wako ni mchache, kwa hivyo usipoteze kuishi maisha ya mtu mwingine."
+        },
+        "author": "Steve Jobs",
+        "authorInfo": { "name": "Steve Jobs", "title": {"en": "Co-founder of Apple Inc.", "sw": "Mwanzilishi Mwenza wa Apple Inc."}, "bio": {"en": "An American inventor, designer and entrepreneur who was the co-founder, chief executive and chairman of Apple Computer.", "sw": "Mvumbuzi, mbunifu na mjasiriamali wa Marekani aliyekuwa mwanzilishi mwenza, mtendaji mkuu na mwenyekiti wa Apple Computer."}, "lifespan": "1955-2011", "wikiUrl": "https://en.wikipedia.org/wiki/Steve_Jobs", "countries": [{ "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }] }
+    },
+    {
+        "quote": {
+            "en": "Strive not to be a success, but rather to be of value.",
+            "sw": "Usijitahidi kuwa na mafanikio, bali kuwa wa thamani."
+        },
         "author": "Albert Einstein",
-        "authorInfo": {
-            "name": "Albert Einstein",
-            "title": "Theoretical Physicist",
-            "bio": "A German-born theoretical physicist who developed the theory of relativity, one of the two pillars of modern physics.",
-            "lifespan": "1879-1955",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Albert_Einstein",
-            "countries": [
-                { "name": "Germany", "code": "de", "wikiUrl": "https://en.wikipedia.org/wiki/Germany" },
-                { "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }
-            ]
-        }
+        "authorInfo": { "name": "Albert Einstein", "title": {"en": "Theoretical Physicist", "sw": "Mwanafizikia wa Kinadharia"}, "bio": {"en": "A German-born theoretical physicist who developed the theory of relativity, one of the two pillars of modern physics.", "sw": "Mwanafizikia wa kinadharia aliyezaliwa Ujerumani ambaye alitengeneza nadharia ya uwiano, moja ya nguzo mbili za fizikia ya kisasa."}, "lifespan": "1879-1955", "wikiUrl": "https://en.wikipedia.org/wiki/Albert_Einstein", "countries": [{ "name": "Germany", "code": "de", "wikiUrl": "https://en.wikipedia.org/wiki/Germany" }, { "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }] }
     },
     {
-        "quote": "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+        "quote": {
+            "en": "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+            "sw": "Utukufu mkuu maishani si katika kutoanguka kamwe, bali katika kuinuka kila tunapoanguka."
+        },
         "author": "Nelson Mandela",
-        "authorInfo": {
-            "name": "Nelson Mandela",
-            "title": "President of South Africa",
-            "bio": "A South African anti-apartheid revolutionary and political leader who served as the first president of South Africa from 1994 to 1999.",
-            "lifespan": "1918-2013",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Nelson_Mandela",
-            "countries": [
-                { "name": "South Africa", "code": "za", "wikiUrl": "https://en.wikipedia.org/wiki/South_Africa" }
-            ]
-        }
+        "authorInfo": { "name": "Nelson Mandela", "title": {"en": "President of South Africa", "sw": "Rais wa Afrika Kusini"}, "bio": {"en": "A South African anti-apartheid revolutionary and political leader who served as the first president of South Africa from 1994 to 1999.", "sw": "Mwanamapinduzi na kiongozi wa kisiasa wa Afrika Kusini aliyepinga ubaguzi wa rangi na kutumikia kama rais wa kwanza wa Afrika Kusini kutoka 1994 hadi 1999."}, "lifespan": "1918-2013", "wikiUrl": "https://en.wikipedia.org/wiki/Nelson_Mandela", "countries": [{ "name": "South Africa", "code": "za", "wikiUrl": "https://en.wikipedia.org/wiki/South_Africa" }] }
     },
     {
-        "quote": "The future belongs to those who believe in the beauty of their dreams.",
+        "quote": {
+            "en": "The future belongs to those who believe in the beauty of their dreams.",
+            "sw": "Mustakabali ni wa wale wanaoamini katika uzuri wa ndoto zao."
+        },
         "author": "Eleanor Roosevelt",
-        "authorInfo": {
-            "name": "Eleanor Roosevelt",
-            "title": "First Lady of the United States",
-            "bio": "An American political figure, diplomat and activist who served as the first lady of the United States from 1933 to 1945.",
-            "lifespan": "1884-1962",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Eleanor_Roosevelt",
-            "countries": [
-                { "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }
-            ]
-        }
+        "authorInfo": { "name": "Eleanor Roosevelt", "title": {"en": "First Lady of the United States", "sw": "Mke wa Rais wa Marekani"}, "bio": {"en": "An American political figure, diplomat and activist who served as the first lady of the United States from 1933 to 1945.", "sw": "Mtu mashuhuri wa kisiasa, mwanadiplomasia na mwanaharakati wa Marekani aliyetumikia kama mke wa rais wa Marekani kutoka 1933 hadi 1945."}, "lifespan": "1884-1962", "wikiUrl": "https://en.wikipedia.org/wiki/Eleanor_Roosevelt", "countries": [{ "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }] }
     },
     {
-        "quote": "An unexamined life is not worth living.",
+        "quote": {
+            "en": "An unexamined life is not worth living.",
+            "sw": "Maisha yasiyochunguzwa hayafai kuishiwa."
+        },
         "author": "Socrates",
-        "authorInfo": {
-            "name": "Socrates",
-            "title": "Greek Philosopher",
-            "bio": "A classical Greek philosopher credited as one of the founders of Western philosophy, and as being the first moral philosopher.",
-            "lifespan": "c. 470–399 BC",
-            "wikiUrl": "https://en.wikipedia.org/wiki/Socrates",
-            "countries": [
-                { "name": "Ancient Greece", "code": "gr", "wikiUrl": "https://en.wikipedia.org/wiki/Ancient_Greece" }
-            ]
-        }
+        "authorInfo": { "name": "Socrates", "title": {"en": "Greek Philosopher", "sw": "Mwanafalsafa wa Kigiriki"}, "bio": {"en": "A classical Greek philosopher credited as one of the founders of Western philosophy, and as being the first moral philosopher.", "sw": "Mwanafalsafa wa Kigiriki wa kale anayetambuliwa kama mmoja wa waanzilishi wa falsafa ya Magharibi, na kama mwanafalsafa wa kwanza wa maadili."}, "lifespan": "c. 470–399 BC", "wikiUrl": "https://en.wikipedia.org/wiki/Socrates", "countries": [{ "name": "Ancient Greece", "code": "gr", "wikiUrl": "https://en.wikipedia.org/wiki/Ancient_Greece" }] }
+    },
+    {
+        "quote": {
+            "en": "The way to get started is to quit talking and begin doing.",
+            "sw": "Njia ya kuanza ni kuacha kuongea na kuanza kutenda."
+        },
+        "author": "Walt Disney",
+        "authorInfo": { "name": "Walt Disney", "title": {"en": "Entrepreneur, Animator, Film Producer", "sw": "Mjasiriamali, Mchoraji Katuni, Mtayarishaji wa Filamu"}, "bio": {"en": "An American entrepreneur, animator, writer, voice actor, and film producer. A pioneer of the American animation industry.", "sw": "Mjasiriamali, mchoraji katuni, mwandishi, muigizaji wa sauti, na mtayarishaji wa filamu wa Marekani. Painia wa tasnia ya uhuishaji ya Marekani."}, "lifespan": "1901-1966", "wikiUrl": "https://en.wikipedia.org/wiki/Walt_Disney", "countries": [{ "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }] }
+    },
+    {
+        "quote": {
+            "en": "Life is what happens when you're busy making other plans.",
+            "sw": "Maisha ni yale yanayotokea unapokuwa na shughuli za kupanga mambo mengine."
+        },
+        "author": "John Lennon",
+        "authorInfo": { "name": "John Lennon", "title": {"en": "Singer, Songwriter", "sw": "Mwimbaji, Mtunzi wa Nyimbo"}, "bio": {"en": "An English singer, songwriter, musician and peace activist who achieved worldwide fame as the founder of the Beatles.", "sw": "Mwimbaji, mtunzi wa nyimbo, mwanamuziki na mwanaharakati wa amani wa Uingereza aliyepata umaarufu duniani kote kama mwanzilishi wa The Beatles."}, "lifespan": "1940-1980", "wikiUrl": "https://en.wikipedia.org/wiki/John_Lennon", "countries": [{ "name": "United Kingdom", "code": "gb", "wikiUrl": "https://en.wikipedia.org/wiki/United_Kingdom" }] }
+    },
+    {
+        "quote": {
+            "en": "Tell me and I forget. Teach me and I remember. Involve me and I learn.",
+            "sw": "Niambie na nitasahau. Nifundishe na nitakumbuka. Nishirikishe na nitajifunza."
+        },
+        "author": "Benjamin Franklin",
+        "authorInfo": { "name": "Benjamin Franklin", "title": {"en": "Founding Father of the United States", "sw": "Mwanzilishi wa Marekani"}, "bio": {"en": "An American polymath who was active as a writer, scientist, inventor, statesman, diplomat, printer, publisher, and political philosopher.", "sw": "Msomi mahiri wa Marekani aliyekuwa mwandishi, mwanasayansi, mvumbuzi, kiongozi wa serikali, mwanadiplomasia, mchapishaji, na mwanafalsafa wa kisiasa."}, "lifespan": "1706-1790", "wikiUrl": "https://en.wikipedia.org/wiki/Benjamin_Franklin", "countries": [{ "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }] }
+    },
+    {
+        "quote": {
+            "en": "It is during our darkest moments that we must focus to see the light.",
+            "sw": "Ni katika nyakati zetu za giza totoro ndipo tunapaswa kukaza macho kuona nuru."
+        },
+        "author": "Aristotle",
+        "authorInfo": { "name": "Aristotle", "title": {"en": "Greek Philosopher", "sw": "Mwanafalsafa wa Kigiriki"}, "bio": {"en": "A Greek philosopher and polymath during the Classical period in Ancient Greece. Taught by Plato, he was the founder of the Lyceum.", "sw": "Mwanafalsafa na msomi mahiri wa Ugiriki wakati wa Kipindi cha Kale nchini Ugiriki. Alifundishwa na Plato, alikuwa mwanzilishi wa Lyceum."}, "lifespan": "384–322 BC", "wikiUrl": "https://en.wikipedia.org/wiki/Aristotle", "countries": [{ "name": "Ancient Greece", "code": "gr", "wikiUrl": "https://en.wikipedia.org/wiki/Ancient_Greece" }] }
+    },
+    {
+        "quote": {
+            "en": "You will face many defeats in life, but never let yourself be defeated.",
+            "sw": "Utakumbana na vipingamizi vingi maishani, lakini usikubali kushindwa."
+        },
+        "author": "Maya Angelou",
+        "authorInfo": { "name": "Maya Angelou", "title": {"en": "Poet, Memoirist, and Civil Rights Activist", "sw": "Mshairi, Mwandishi wa Kumbukumbu, na Mwanaharakati wa Haki za Kiraia"}, "bio": {"en": "An American poet, memoirist, and civil rights activist. She published seven autobiographies, three books of essays, and several books of poetry.", "sw": "Mshairi, mwandishi wa kumbukumbu, na mwanaharakati wa haki za kiraia wa Marekani. Alichapisha tawasifu saba, vitabu vitatu vya insha, na vitabu kadhaa vya mashairi."}, "lifespan": "1928-2014", "wikiUrl": "https://en.wikipedia.org/wiki/Maya_Angelou", "countries": [{ "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }] }
+    },
+    {
+        "quote": {
+            "en": "In the end, it's not the years in your life that count. It's the life in your years.",
+            "sw": "Mwishowe, siyo miaka katika maisha yako ndiyo muhimu. Ni maisha katika miaka yako."
+        },
+        "author": "Abraham Lincoln",
+        "authorInfo": { "name": "Abraham Lincoln", "title": {"en": "16th President of the United States", "sw": "Rais wa 16 wa Marekani"}, "bio": {"en": "An American lawyer and statesman who served as the 16th president of the United States from 1861 until his assassination in 1865.", "sw": "Mwanasheria na kiongozi wa serikali wa Marekani aliyetumikia kama rais wa 16 wa Marekani kutoka 1861 hadi kuuawa kwake mwaka 1865."}, "lifespan": "1809-1865", "wikiUrl": "https://en.wikipedia.org/wiki/Abraham_Lincoln", "countries": [{ "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }] }
+    },
+    {
+        "quote": {
+            "en": "The only impossible journey is the one you never begin.",
+            "sw": "Safari isiyowezekana pekee ni ile usiyoianza kamwe."
+        },
+        "author": "Tony Robbins",
+        "authorInfo": { "name": "Tony Robbins", "title": {"en": "Author, Coach, Speaker", "sw": "Mwandishi, Kocha, Mzungumzaji"}, "bio": {"en": "An American author, coach, speaker, and philanthropist. He is known for his infomercials, seminars, and self-help books.", "sw": "Mwandishi, kocha, mzungumzaji, na mfadhili wa Marekani. Anajulikana kwa matangazo yake ya biashara, semina, na vitabu vya kujisaidia."}, "lifespan": "born 1960", "wikiUrl": "https://en.wikipedia.org/wiki/Tony_Robbins", "countries": [{ "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }] }
+    },
+    {
+        "quote": {
+            "en": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+            "sw": "Mafanikio si ya mwisho, kushindwa si kifo: ni ujasiri wa kuendelea ndio muhimu."
+        },
+        "author": "Winston Churchill",
+        "authorInfo": { "name": "Winston Churchill", "title": {"en": "Prime Minister of the United Kingdom", "sw": "Waziri Mkuu wa Uingereza"}, "bio": {"en": "A British statesman, soldier and writer who served as Prime Minister of the United Kingdom from 1940 to 1945, and again from 1951 to 1955.", "sw": "Kiongozi wa serikali, mwanajeshi na mwandishi wa Uingereza aliyetumikia kama Waziri Mkuu wa Uingereza kutoka 1940 hadi 1945, na tena kutoka 1951 hadi 1955."}, "lifespan": "1874-1965", "wikiUrl": "https://en.wikipedia.org/wiki/Winston_Churchill", "countries": [{ "name": "United Kingdom", "code": "gb", "wikiUrl": "https://en.wikipedia.org/wiki/United_Kingdom" }] }
+    },
+    {
+        "quote": {
+            "en": "If life were predictable it would cease to be life, and be without flavor.",
+            "sw": "Kama maisha yangekuwa ya kutabirika yangekoma kuwa maisha, na yangekosa ladha."
+        },
+        "author": "Eleanor Roosevelt",
+        "authorInfo": { "name": "Eleanor Roosevelt", "title": {"en": "First Lady of the United States", "sw": "Mke wa Rais wa Marekani"}, "bio": {"en": "An American political figure, diplomat and activist who served as the first lady of the United States from 1933 to 1945.", "sw": "Mtu mashuhuri wa kisiasa, mwanadiplomasia na mwanaharakati wa Marekani aliyetumikia kama mke wa rais wa Marekani kutoka 1933 hadi 1945."}, "lifespan": "1884-1962", "wikiUrl": "https://en.wikipedia.org/wiki/Eleanor_Roosevelt", "countries": [{ "name": "United States", "code": "us", "wikiUrl": "https://en.wikipedia.org/wiki/United_States" }] }
     }
 ]
+

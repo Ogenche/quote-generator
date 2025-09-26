@@ -1,113 +1,329 @@
+/* =================================================================================
+    CSS Variables for Theming and Consistency
+    - Manages colors, fonts, and shadows for both light and dark themes.
+    - Simplifies theme switching and maintains a consistent design language.
+====================================================================================
+*/
+:root {
+    --font-quote: 'Merriweather', serif;
+    --font-ui: 'Poppins', sans-serif;
+
+    /* Light Theme Palette (Shades of Blue) */
+    --bg-color-light: #f0f2f5; 
+    --card-bg-light: rgba(255, 255, 255, 0.95);
+    --text-color-light: #1f2937;
+    --author-color-light: #4b5563;
+    --primary-color-light: #3b82f6; 
+    --primary-hover-light: #2563eb; 
+    --secondary-color-light: #60a5fa; 
+    --modal-link-color-light: #1d4ed8;
+    --shadow-color-light: rgba(59, 130, 246, 0.2); 
+    --icon-color-light: #374151;
+    --border-color-light: rgba(0, 0, 0, 0.1);
+
+    /* Dark Theme Palette (Muted Grays) */
+    --bg-color-dark: #111827; 
+    --card-bg-dark: rgba(31, 41, 55, 0.95);
+    --text-color-dark: #f3f4f6;
+    --author-color-dark: #9ca3af;
+    --primary-color-dark: #4b5563; 
+    --primary-hover-dark: #374151; 
+    --secondary-color-dark: #374151; 
+    --modal-link-color-dark: #f9fafb;
+    --shadow-color-dark: rgba(156, 163, 175, 0.1); 
+    --icon-color-dark: #f0f0f0;
+    --border-color-dark: rgba(255, 255, 255, 0.1);
+}
+
+/* Applying theme variables based on the <html> data-theme attribute */
+html[data-theme='light'] {
+    --bg-color: var(--bg-color-light);
+    --card-bg: var(--card-bg-light);
+    --text-color: var(--text-color-light);
+    --author-color: var(--author-color-light);
+    --primary-color: var(--primary-color-light);
+    --primary-hover: var(--primary-hover-light);
+    --secondary-color: var(--secondary-color-light);
+    --modal-link-color: var(--modal-link-color-light);
+    --shadow-color: var(--shadow-color-light);
+    --icon-color: var(--icon-color-light);
+    --border-color: var(--border-color-light);
+}
+
+html[data-theme='dark'] {
+    --bg-color: var(--bg-color-dark);
+    --card-bg: var(--card-bg-dark);
+    --text-color: var(--text-color-dark);
+    --author-color: var(--author-color-dark);
+    --primary-color: var(--primary-color-dark);
+    --primary-hover: var(--primary-hover-dark);
+    --secondary-color: var(--secondary-color-dark);
+    --modal-link-color: var(--modal-link-color-dark);
+    --shadow-color: var(--shadow-color-dark);
+    --icon-color: var(--icon-color-dark);
+    --border-color: var(--border-color-dark);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* =================================================================================
+    General Body and Layout Styling
+====================================================================================
+*/
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font-ui);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f0f2f5;
-    margin: 0;
-    padding: 15px;
-    box-sizing: border-box;
+    min-height: 100vh;
+    padding: 1.5rem;
+    color: var(--text-color);
+    background-color: var(--bg-color); 
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
+/* =================================================================================
+    Main Quote Container and Card Styling
+====================================================================================
+*/
 .quote-container {
     text-align: center;
-    background-color: white;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px_8px rgba(0,0,0,0.1);
+    background-color: var(--card-bg);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px -5px var(--shadow-color);
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
+    border: 1px solid var(--border-color);
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
+
+.quote-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+h1 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    text-align: left;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Styling for icon-only buttons in the header */
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--icon-color);
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.icon-btn:hover {
+    transform: scale(1.15);
+    color: var(--primary-color);
+}
+
+/* Style for the favorited heart icon */
+#favorite-btn.favorited {
+    color: #e74c3c; /* Red color when active */
+}
+#favorite-btn.favorited:hover {
+    color: #c0392b; /* Darker red on hover */
+}
+
+/* =================================================================================
+    Quote and Author Text Styling
+====================================================================================
+*/
 
 .quote-box {
-    margin-bottom: 20px;
-    min-height: 100px;
+    margin-bottom: 2.5rem;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
+/* Quote text with fade-in/out animation */
 #quote-text {
-    font-size: 1.5em;
+    font-family: var(--font-quote);
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
     font-style: italic;
-    transition: opacity 0.4s ease-in-out;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
 }
 
-#quote-author {
-    font-size: 1.1em;
-    color: #555;
+#quote-text.fade-out {
+    opacity: 0;
 }
+
+/* Author text with clickable span */
+#quote-author {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--author-color);
+    transition: color 0.3s ease;
+}
+
+#quote-author span {
+    cursor: pointer;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+#quote-author span:hover {
+    border-color: var(--primary-color);
+}
+
+/* =================================================================================
+    Action Button Styling
+====================================================================================
+*/
 
 .button-container {
     display: flex;
-    gap: 10px; /* Adds space between the buttons */
+    flex-wrap: wrap; /* Allows buttons to wrap on smaller screens */
+    gap: 0.75rem;
+    justify-content: center;
+    align-items: stretch;
 }
 
-/* Style all buttons inside the container */
-.button-container button {
-    flex: 1; /* Makes all buttons take up equal space */
-    background-color: #007bff;
+/* General button class with hover micro-interactions */
+.btn {
     color: white;
     border: none;
-    padding: 12px 0; /* Adjusted padding for equal height */
-    font-size: 1em;
-    border-radius: 5px;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    border-radius: 0.5rem;
     cursor: pointer;
-    transition: background-color 0.3s, opacity 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px -5px var(--shadow-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.button-container button:hover {
-    background-color: #0056b3;
+.btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px -5px var(--shadow-color);
 }
 
-/* Style for when buttons are disabled (e.g., during loading) */
-.button-container button:disabled {
+.btn:active:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.btn:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
+    opacity: 0.7;
 }
+
+/* Primary button (New Quote) is larger */
+.btn-primary {
+    background-color: var(--primary-color);
+    flex-grow: 2;
+    flex-basis: 200px;
+}
+.btn-primary:hover:not(:disabled) { background-color: var(--primary-hover); }
+
+/* Secondary buttons (Previous, Copy, Tweet) */
+.btn-secondary {
+    background-color: var(--secondary-color);
+    flex-grow: 1;
+}
+
+.secondary-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-grow: 1;
+}
+
+.secondary-buttons .btn {
+    flex-grow: 1; /* Make copy and tweet buttons equal width */
+    padding: 0.75rem 1rem; /* Slightly less padding for smaller buttons */
+}
+.secondary-buttons .btn i {
+    font-size: 1.2rem;
+}
+
 
 #error-message {
     color: #d93025;
     font-weight: bold;
 }
 
-/* Make the author name in the main view look clickable */
-#quote-author span {
-    cursor: pointer;
-    text-decoration: underline;
-    transition: color 0.2s;
-}
+/* =================================================================================
+    Modal Styling (for Author and Favorites)
+====================================================================================
+*/
 
-#quote-author span:hover {
-    color: #0056b3;
-}
-
-/* Modal Overlay (the dark background) */
+/* Semi-transparent background overlay */
 #modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Author Modal Popup */
-#author-modal {
+/* Modal popup with scale-up animation */
+#author-modal, .favorites-modal {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transform: translate(-50%, -50%) scale(0.9);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
     z-index: 101;
     width: 90%;
     max-width: 500px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    text-align: left;
 }
 
-/* Close button for the modal */
-#modal-close-btn {
+#modal-overlay.visible,
+#author-modal.visible,
+.favorites-modal.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#author-modal.visible,
+.favorites-modal.visible {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#modal-close-btn, .fav-modal-close-btn {
     position: absolute;
     top: 10px;
     right: 15px;
@@ -115,50 +331,58 @@ body {
     border: none;
     font-size: 2.0em;
     cursor: pointer;
-    color: #888;
+    color: var(--author-color);
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-/* Styling for content inside the modal */
-#modal-content {
-    font-size: 0.9em; /* Smaller font as requested */
-    color: #333;
+#modal-close-btn:hover, .fav-modal-close-btn:hover {
+    color: var(--primary-color);
+    transform: rotate(90deg);
 }
 
+/* Content styling within the modals */
 #modal-author-name a {
-    color: #0056b3;
+    color: var(--modal-link-color);
     text-decoration: none;
-    font-size: 1.5em;
+    font-size: 1.75em;
+    transition: color 0.2s ease;
 }
-#modal-author-name a:hover {
-    text-decoration: underline;
-}
-
-#modal-author-title {
-    font-style: italic;
-    color: #666;
-    margin-top: -5px;
+#modal-author-name a:hover { 
+    text-decoration: underline; 
+    color: var(--primary-color);
 }
 
-#modal-flags-container {
-    margin: 15px 0;
-}
-
-#modal-flags-container a {
-    margin-right: 10px;
-}
+#modal-author-title { font-style: italic; color: var(--author-color); }
 
 #modal-flags-container img {
     width: 40px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
+    margin: 15px 10px 15px 0;
+}
+.favorites-modal h2 { margin-bottom: 1rem; }
+.favorites-modal ul { list-style: none; max-height: 60vh; overflow-y: auto; }
+.favorites-modal li { padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
+.favorites-modal li:last-child { border-bottom: none; }
+.favorites-modal p { font-family: var(--font-quote); font-style: italic; }
+.favorites-modal strong { display: block; margin-top: 0.5rem; color: var(--author-color); }
+.remove-favorite-btn { background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 0.9rem; margin-top: 0.5rem; padding: 0.25rem; }
+
+/* =================================================================================
+    Responsive Design for Mobile
+====================================================================================
+*/
+@media (max-width: 600px) {
+    .quote-container { padding: 1.5rem; }
+    h1 { font-size: 1.25rem; }
+    
+    /* Stack all buttons vertically on small screens */
+    .button-container {
+        flex-direction: column;
+        align-items: stretch; /* Make all buttons full width */
+    }
+    .secondary-buttons {
+        width: 100%;
+    }
 }
 
-#modal-author-lifespan {
-    font-size: 0.9em;
-    color: #555;
-}
-
-/* Helper class to hide/show elements */
-.hidden {
-    display: none;
-}

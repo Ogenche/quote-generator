@@ -1,77 +1,114 @@
-# 💡 Random Quote Generator
+# Random Quote Generator
 
-A sleek and interactive web application that displays random inspirational quotes. Users can discover new quotes, learn about the authors, and share their favorite quotes on social media. This project was built with vanilla HTML, CSS, and JavaScript, focusing on clean code, modern web APIs, and a great user experience.
+> A web application that displays random quotes. Users can discover new quotes, learn about the authors, and share their favorite quotes on social media. Built with a focus on clean code. This project uses vanilla technologies (HTML, CSS, and JavaScript).
 
-**[View Live Demo Here](https://ogenche.github.io/quote-generator/)**
-
-![Screenshots of the Random Quote Generator App]
-
-![alt text](image.png)
+**[View Live Demo Here](https://quote-generator-orpin-two.vercel.app)**
 
 ---
 
-## ✨ Features
+## Screenshots
 
-This application is packed with features designed to provide a rich and seamless user experience:
-
-- **Dynamic Quote Loading:** Quotes are fetched asynchronously from an external `quotes.json` file, keeping the data separate from the application logic.
-- **Random Quote Display:** Click the "New Quote" button to display a random quote from the collection.
-- **Copy to Clipboard:** Easily copy the current quote and author to your clipboard with a single click. Visual feedback is provided upon a successful copy.
-- **Tweet a Quote:** Share the inspiration! The "Tweet" button opens a new Twitter window with the quote pre-populated and ready to be shared.
-- **Interactive Author Information:**
-  - Click on an author's name to open a detailed modal popup.
-  - The modal displays a short biography, the author's title (e.g., "Philosopher," "President"), and their lifespan.
-  - The author's name in the modal is a direct link to their Wikipedia page for further reading.
-  - Includes clickable country flags that link to the respective country's Wikipedia page. Handles multiple nationalities.
-- **Persistent State:** The application uses `localStorage` to remember the last quote you viewed, so when you return to the page, you'll pick up right where you left off.
-- **Responsive Design:** The layout is fully responsive and looks great on all devices, from mobile phones to desktop computers.
-- **User Feedback:** The application provides clear loading states when fetching quotes and displays friendly error messages if the data fails to load.
+![Light Mode Screenshot](./assets/light-mode.png)
+![Dark Mode Screenshot](./assets/dark-mode.png)
 
 ---
 
-## 🛠️ Built With
+## Features
 
-This project relies on the fundamentals of web development and utilizes modern browser features.
+- **Multi-Language Support**:
+  - Toggle between English and Swahili with a single click.
+  - The entire UI, including quotes, author details, and button text, updates instantly.
+  - The user's language preference is saved in localStorage for their next visit.
+- **Dynamic Quote Loading**: Quotes and their translations are fetched asynchronously from an external `quotes.json` file (keeps data and logic separate).
+- **Dark/Light Mode**: A theme toggle (🌙/🌞) allows users to switch between a clean light theme and an eye-friendly dark theme. The user's preference is saved in `localStorage`.
+- **Quote History**: Never lose a great quote again! Users can click the "Previous" button to revisit the last few quotes they've viewed.
+- **Favorite Quotes System**:
+  - Users can "like" a quote by clicking the heart icon (♥️), saving it to a personal favorites list.
+  - Can save English and Swahili versions of the same quote separately.
+  - The heart icon (♥️) accurately reflects the favorite status for the currently viewed language.
+  - All favorite quotes are stored persistently in `localStorage` and are vieweble in a dedicated modal.
+  - A dedicated modal allows users to view and manage their collection of saved quotes.
+- **Interactive Author Information**:
+  - Click on an author's name to open a detailed modal with their biography, title, and lifespan.
+  - The modal includes a direct link to the author's Wikipedia page for further reading.
+  - Country flags link to the respective Wikipedia pages and can handle multiple nationalities.
+- **Modern UI & UX**:
+  - **Animations**: Subtle fade transitions for new quotes, a scale-up effect for modals, and hover micro-interactions on buttons create a fluid user experience.
+  - **Typography**: Uses Google Fonts (Merriweather and Poppins) for high readability and aesthetic appeal.
+  - **Design**: Features a modern card-based design with soft shadows and a cohesive color palette for both light and dark themes.
+- **Responsive & Accessible**:
+  - The layout is fully responsive and looks great on all devices, from mobile phones to desktops.
+  - ARIA roles and keyboard navigation (e.g., `Esc` to close modals) are implemented for better accessibility.
+- **Shareability**:
+  - **Copy to Clipboard**: Easily copy the current quote with a single click.
+  - **Tweet a Quote**: The "Tweet" button opens Twitter with the quote pre-populated and ready to share.
 
-- **HTML5:** For the structure and content of the application.
-- **CSS3:** For all styling, including responsive design using Flexbox and media queries.
-- **Vanilla JavaScript (ES6+):** For all application logic, including:
+---
+
+## Built With
+
+This project was built from the ground up using only fundamental web technologies, with **no frameworks or libraries**.
+
+- **Vanilla HTML5**: For semantic structure and content.
+- **Vanilla CSS3**: For all styling, including:
+  - Flexbox for responsive layouts.
+  - CSS Variables (Custom Properties) for powerful and easy theming.
+  - Transitions and animations for a dynamic feel.
+- **Vanilla JavaScript (ES6+)**: For all application logic including:
   - `fetch()` API for asynchronous data loading.
   - `async/await` syntax for cleaner asynchronous code.
   - DOM manipulation to dynamically update content.
-  - `localStorage` API for session persistence.
-  - `navigator.clipboard` API for copy functionality.
+  - `localStorage` API for saving user preferences (theme, favorites).
+  - `navigator.clipboard` API for the copy-to-clipboard functionality.
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-To get a local copy up and running, follow these simple steps.
+To get a local copy up and running, follow these steps.
 
 ### Prerequisites
 
-You just need a modern web browser.
+You only need a modern web browser.
 
 ### Installation
 
 1.  Clone the repository to your local machine:
-    ```sh
+    ```bash
     git clone [https://github.com/Ogenche/quote-generator.git](https://github.com/Ogenche/quote-generator.git)
     ```
 2.  Navigate to the project directory:
-    ```sh
+    ```bash
     cd quote-generator
     ```
-3.  Open the `index.html` file in your browser to run the application.
+3.  Open the `index.html` file in your browser. That's it!
 
 ---
 
-## 使い方 (How to Use)
+## How to Use
 
-Using the application is straightforward:
+### English
 
-1.  Upon loading, a random quote (or your last viewed quote) is displayed.
-2.  Click **New Quote** to see another random quote.
-3.  Click **Copy** to save the quote to your clipboard.
-4.  Click **Tweet** to share the quote on Twitter.
-5.  Click the **author's name** to learn more about them in a popup window.
+- Upon loading, a random quote is displayed.
+- Click **New Quote** to see another random quote.
+- Click **Previous** to go back to the last quote you viewed.
+- Click the **Copy** icon to save the quote to your clipboard.
+- Click the **Tweet** icon to share the quote on Twitter/X.
+- Click the globe icon (🌍) to switch between English and Swahili.
+- Click the theme icon (🌙/🌞) in the top-right to switch between dark and light mode.
+- Click the heart icon (♥️) to add or remove the current quote from your favorites.
+- Click the star icon (⭐) to view your list of saved favorite quotes.
+- Click the author's name to learn more about them in a popup window.
+
+### Swahili
+
+- Ukurasa unapofunguka, nukuu nasibu huonyeshwa.
+- Bonyeza **Nukuu Mpya** kuona nukuu nyingine nasibu.
+- Bonyeza **Iliyopita** kurudi kwenye nukuu uliyoiona mwisho.
+- Bonyeza ikoni ya **Kunakili** kunakili nukuu kwenye clipboard yako.
+- Bonyeza ikoni ya **Twitter** kushiriki nukuu kwenye Twitter/X.
+- Bonyeza ikoni ya dunia (🌍) kubadilisha kati ya Kiingereza na Kiswahili.
+- Bonyeza ikoni ya mandhari (🌙/🌞) upande wa juu kulia kubadilisha kati ya mandhari ya giza na angavu.
+- Bonyeza ikoni ya moyo (♥️) kuongeza au kuondoa nukuu kwenye orodha yako ya vipendwa.
+- Bonyeza ikoni ya nyota (⭐) kuona orodha yako ya nukuu ulizohifadhi kama vipendwa.
+- Bonyeza jina la mwandishi kujifunza zaidi kumhusu kwenye kidirisha cha arifa.
